@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { LockOverlay } from '@/components/LockOverlay';
-import { CopyButton } from '@/components/CopyButton';
 import { Ticker } from '@/components/Ticker';
 import Image from 'next/image';
 
@@ -14,27 +13,11 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-background">
-      {/* Background gradient effects */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 gradient-primary rounded-full blur-[128px] opacity-20 animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-[128px] opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div
-        className="fixed inset-0 -z-10 opacity-[0.02]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255, 61, 143, 0.3) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255, 61, 143, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }}
-      />
-
       {/* Lock Overlay - The main interactive feature */}
       <LockOverlay telegramLink={telegramLink} />
 
       {/* Ticker */}
-      <Ticker />
+      <Ticker contractAddress={contractAddress} />
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-16 md:py-24">
@@ -79,19 +62,6 @@ export default function Home() {
                 <span className="text-primary"> Unlock the key.</span>
               </p>
             </div>
-          </motion.div>
-
-          {/* Contract Address Section */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="w-full max-w-2xl"
-          >
-            <CopyButton
-              textToCopy={contractAddress}
-              label="Contract Address"
-            />
           </motion.div>
 
           {/* Feature Cards */}
