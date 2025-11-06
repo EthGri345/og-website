@@ -101,7 +101,7 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
                 <div className="absolute inset-0 gradient-primary rounded-full blur-3xl opacity-30 animate-pulse" />
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
-                    src="/logo.svg"
+                    src="/logo.png"
                     alt="OnlyGoon Logo"
                     width={192}
                     height={192}
