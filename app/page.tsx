@@ -9,8 +9,8 @@ export default function Home() {
   const contractAddress = 'CA_PLACEHOLDER_REPLACE_WITH_ACTUAL_ADDRESS';
   // Telegram community link
   const telegramLink = 'https://t.me/+muEv0hqi5Ug3NjE1';
-  // Placeholder X/Twitter link
-  const xLink = 'https://x.com';
+  // X community link
+  const xLink = 'https://x.com/i/communities/1986890630526853327';
 
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-background">
