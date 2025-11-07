@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiLock, FiUnlock } from 'react-icons/fi';
+import { FiLock, FiUnlock, FiChevronDown } from 'react-icons/fi';
 import { SiTelegram } from 'react-icons/si';
 import Image from 'next/image';
 
@@ -180,6 +180,32 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
                     </motion.p>
                   )}
                 </AnimatePresence>
+
+                {/* Scroll indicator arrow */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  className="mt-8"
+                >
+                  <motion.div
+                    animate={{
+                      y: [0, 10, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    className="flex flex-col items-center gap-2"
+                  >
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">Scroll Down</p>
+                    <div className="relative">
+                      <div className="absolute inset-0 gradient-primary blur-lg opacity-50" />
+                      <FiChevronDown className="relative w-8 h-8 text-primary" />
+                    </div>
+                  </motion.div>
+                </motion.div>
 
                 {/* Content section - appears below the lock */}
                 <motion.div
