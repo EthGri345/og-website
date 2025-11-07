@@ -89,96 +89,137 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
               }}
             />
 
-            {/* Main content */}
-            <div className="relative z-10 flex flex-col items-center justify-center gap-8 px-4">
-              {/* Logo */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-32 h-32 md:w-48 md:h-48"
-              >
-                <div className="absolute inset-0 gradient-primary rounded-full blur-3xl opacity-30 animate-pulse" />
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src="/logo.png"
-                    alt="OnlyGoon Logo"
-                    width={192}
-                    height={192}
-                    className="w-full h-full object-contain"
-                    priority
-                  />
-                </div>
-              </motion.div>
-
-              {/* Lock icon and text */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-col items-center gap-4"
-              >
+            {/* Main content - scrollable container */}
+            <div className="relative z-10 w-full h-full overflow-y-auto flex flex-col items-center justify-start py-12 px-4">
+              <div className="flex flex-col items-center justify-center gap-8 max-w-4xl mx-auto">
+                {/* Logo */}
                 <motion.div
-                  animate={{
-                    rotate: [0, -5, 5, -5, 0],
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                  }}
-                  className="relative"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative w-32 h-32 md:w-48 md:h-48"
                 >
-                  <div className="absolute inset-0 gradient-primary blur-xl opacity-50" />
-                  <FiLock className="relative w-16 h-16 md:w-20 md:h-20 text-primary" />
+                  <div className="absolute inset-0 gradient-primary rounded-full blur-3xl opacity-30 animate-pulse" />
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src="/logo.png"
+                      alt="OnlyGoon Logo"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
+                      priority
+                    />
+                  </div>
                 </motion.div>
 
-                <h1 className="text-3xl md:text-5xl font-bold text-center gradient-text">
-                  ACCESS RESTRICTED
-                </h1>
-
-                <p className="text-gray-400 text-center max-w-md text-sm md:text-base">
-                  The portal is locked. Find the key to unlock exclusive access.
-                </p>
-              </motion.div>
-
-              {/* Unlock button */}
-              <AnimatePresence>
-                {showUnlockHint && (
-                  <motion.button
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleUnlock}
-                    className="relative group px-8 py-4 rounded-full font-bold text-white overflow-hidden"
+                {/* Lock icon and text */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-col items-center gap-4"
+                >
+                  <motion.div
+                    animate={{
+                      rotate: [0, -5, 5, -5, 0],
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 3,
+                    }}
+                    className="relative"
                   >
-                    <div className="absolute inset-0 gradient-primary" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundSize: '200% 100%' }} />
-                    <div className="relative flex items-center gap-3">
-                      <FiUnlock className="w-5 h-5" />
-                      <span className="text-sm md:text-base">UNLOCK ACCESS</span>
+                    <div className="absolute inset-0 gradient-primary blur-xl opacity-50" />
+                    <FiLock className="relative w-16 h-16 md:w-20 md:h-20 text-primary" />
+                  </motion.div>
+
+                  <h1 className="text-3xl md:text-5xl font-bold text-center gradient-text">
+                    ACCESS RESTRICTED
+                  </h1>
+
+                  <p className="text-gray-400 text-center max-w-md text-sm md:text-base">
+                    The portal is locked. Find the key to unlock exclusive access.
+                  </p>
+                </motion.div>
+
+                {/* Unlock button */}
+                <AnimatePresence>
+                  {showUnlockHint && (
+                    <motion.button
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleUnlock}
+                      className="relative group px-8 py-4 rounded-full font-bold text-white overflow-hidden"
+                    >
+                      <div className="absolute inset-0 gradient-primary" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundSize: '200% 100%' }} />
+                      <div className="relative flex items-center gap-3">
+                        <FiUnlock className="w-5 h-5" />
+                        <span className="text-sm md:text-base">UNLOCK ACCESS</span>
+                      </div>
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+
+                {/* Hint text */}
+                <AnimatePresence>
+                  {showUnlockHint && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-xs md:text-sm text-gray-500 text-center max-w-xs"
+                    >
+                      Click to reveal the key
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+
+                {/* Content section - appears below the lock */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1.0 }}
+                  className="mt-12 w-full max-w-3xl"
+                >
+                  <div className="glass-effect rounded-2xl p-6 md:p-10 border border-white/5">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text text-center">
+                      OnlyGooners — Your Crypto Gateway to Exclusive Access
+                    </h2>
+
+                    <div className="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+                      <p>
+                        OnlyGooners (OG) is a Web3-powered community designed for fans who want direct access to their favorite creators—without the usual paywalls or platforms in the way.
+                      </p>
+                      <p>
+                        By combining blockchain innovation with the modern creator economy, we're introducing a more fair, decentralized way to enjoy gooning on chain.
+                      </p>
+
+                      <div className="mt-8 pt-6 border-t border-white/10">
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
+                          <span className="text-2xl">💠</span>
+                          <span className="gradient-text">How It Works</span>
+                        </h3>
+
+                        <div className="space-y-3 text-gray-300">
+                          <p>
+                            Membership in the OnlyGooners world is driven by the <span className="font-bold text-primary">OG Token</span> — your digital pass to premium creator releases and the ability to vote on content to come.
+                          </p>
+                          <p>
+                            No monthly fees. No accounts on random websites, Just seamless gooning on chain and complete transparency.
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </motion.button>
-                )}
-              </AnimatePresence>
-
-              {/* Hint text */}
-              <AnimatePresence>
-                {showUnlockHint && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-xs md:text-sm text-gray-500 text-center max-w-xs"
-                  >
-                    Click to reveal the key
-                  </motion.p>
-                )}
-              </AnimatePresence>
+                  </div>
+                </motion.div>
+              </div>
             </div>
 
             {/* Corner decorations */}
