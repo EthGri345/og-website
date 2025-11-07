@@ -144,25 +144,67 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
                   </p>
                 </motion.div>
 
-                {/* Unlock button */}
+                {/* Unlock button with flanking arrows */}
                 <AnimatePresence>
                   {showUnlockHint && (
-                    <motion.button
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleUnlock}
-                      className="relative group px-8 py-4 rounded-full font-bold text-white overflow-hidden"
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6 }}
+                      className="flex items-center gap-6 md:gap-8"
                     >
-                      <div className="absolute inset-0 gradient-primary" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundSize: '200% 100%' }} />
-                      <div className="relative flex items-center gap-3">
-                        <FiUnlock className="w-5 h-5" />
-                        <span className="text-sm md:text-base">UNLOCK ACCESS</span>
-                      </div>
-                    </motion.button>
+                      {/* Left arrow */}
+                      <motion.div
+                        animate={{
+                          y: [0, 8, 0],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                        className="relative"
+                      >
+                        <div className="absolute inset-0 gradient-primary blur-lg opacity-50" />
+                        <FiChevronDown className="relative w-6 h-6 md:w-8 md:h-8 text-primary" />
+                      </motion.div>
+
+                      {/* Unlock button */}
+                      <motion.button
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleUnlock}
+                        className="relative group px-8 py-4 rounded-full font-bold text-white overflow-hidden"
+                      >
+                        <div className="absolute inset-0 gradient-primary" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundSize: '200% 100%' }} />
+                        <div className="relative flex items-center gap-3">
+                          <FiUnlock className="w-5 h-5" />
+                          <span className="text-sm md:text-base">UNLOCK ACCESS</span>
+                        </div>
+                      </motion.button>
+
+                      {/* Right arrow */}
+                      <motion.div
+                        animate={{
+                          y: [0, 8, 0],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: 0.2,
+                        }}
+                        className="relative"
+                      >
+                        <div className="absolute inset-0 gradient-primary blur-lg opacity-50" />
+                        <FiChevronDown className="relative w-6 h-6 md:w-8 md:h-8 text-primary" />
+                      </motion.div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
 
@@ -180,32 +222,6 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
                     </motion.p>
                   )}
                 </AnimatePresence>
-
-                {/* Scroll indicator arrow */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                  className="mt-8"
-                >
-                  <motion.div
-                    animate={{
-                      y: [0, 10, 0],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                    className="flex flex-col items-center gap-2"
-                  >
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">Scroll Down</p>
-                    <div className="relative">
-                      <div className="absolute inset-0 gradient-primary blur-lg opacity-50" />
-                      <FiChevronDown className="relative w-8 h-8 text-primary" />
-                    </div>
-                  </motion.div>
-                </motion.div>
 
                 {/* Content section - appears below the lock */}
                 <motion.div
