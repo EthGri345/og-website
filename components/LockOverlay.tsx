@@ -225,10 +225,10 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
 
                 {/* Content section - appears below the lock */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.0 }}
-                  className="mt-12 w-full max-w-3xl"
+                  className="mt-32 md:mt-40 w-full max-w-3xl"
                 >
                   <div className="glass-effect rounded-2xl p-6 md:p-10 border border-white/5">
                     <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text text-center">
