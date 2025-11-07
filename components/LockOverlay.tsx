@@ -13,12 +13,21 @@ interface LockOverlayProps {
 export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOverlayProps) => {
   const [isLocked, setIsLocked] = useState(true);
   const [showUnlockHint, setShowUnlockHint] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowUnlockHint(true);
     }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -224,43 +233,45 @@ export const LockOverlay = ({ telegramLink = 'https://t.me/onlygoon' }: LockOver
                 </AnimatePresence>
 
                 {/* Content section - appears below the lock */}
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.0 }}
-                  className="mt-32 md:mt-40 w-full max-w-3xl"
-                >
-                  <div className="glass-effect rounded-2xl p-6 md:p-10 border border-white/5">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text text-center">
-                      OnlyGooners — Your Crypto Gateway to Exclusive Access
-                    </h2>
+                {showContent && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="mt-32 md:mt-40 w-full max-w-3xl"
+                  >
+                    <div className="glass-effect rounded-2xl p-6 md:p-10 border border-white/5">
+                      <h2 className="text-2xl md:text-3xl font-bold mb-4 gradient-text text-center">
+                        OnlyGooners — Your Crypto Gateway to Exclusive Access
+                      </h2>
 
-                    <div className="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                      <p>
-                        OnlyGooners (OG) is a Web3-powered community designed for fans who want direct access to their favorite creators—without the usual paywalls or platforms in the way.
-                      </p>
-                      <p>
-                        By combining blockchain innovation with the modern creator economy, we're introducing a more fair, decentralized way to enjoy gooning on chain.
-                      </p>
+                      <div className="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+                        <p>
+                          OnlyGooners (OG) is a Web3-powered community designed for fans who want direct access to their favorite creators—without the usual paywalls or platforms in the way.
+                        </p>
+                        <p>
+                          By combining blockchain innovation with the modern creator economy, we're introducing a more fair, decentralized way to enjoy gooning on chain.
+                        </p>
 
-                      <div className="mt-8 pt-6 border-t border-white/10">
-                        <h3 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
-                          <span className="text-2xl">💠</span>
-                          <span className="gradient-text">How It Works</span>
-                        </h3>
+                        <div className="mt-8 pt-6 border-t border-white/10">
+                          <h3 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
+                            <span className="text-2xl">💠</span>
+                            <span className="gradient-text">How It Works</span>
+                          </h3>
 
-                        <div className="space-y-3 text-gray-300">
-                          <p>
-                            Membership in the OnlyGooners world is driven by the <span className="font-bold text-primary">OG Token</span> — your digital pass to premium creator releases and the ability to vote on content to come.
-                          </p>
-                          <p>
-                            No monthly fees. No accounts on random websites, Just seamless gooning on chain and complete transparency.
-                          </p>
+                          <div className="space-y-3 text-gray-300">
+                            <p>
+                              Membership in the OnlyGooners world is driven by the <span className="font-bold text-primary">OG Token</span> — your digital pass to premium creator releases and the ability to vote on content to come.
+                            </p>
+                            <p>
+                              No monthly fees. No accounts on random websites, Just seamless gooning on chain and complete transparency.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                )}
               </div>
             </div>
 
